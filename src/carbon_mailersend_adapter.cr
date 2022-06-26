@@ -37,7 +37,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         text:             email.text_body
     }
 
-      if template_id = email.template_id
+      if email.template_id
         data = data.merge!({"template_id" => template_id})
       end
 
