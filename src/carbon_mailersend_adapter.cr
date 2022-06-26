@@ -36,7 +36,8 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         subject:          email.subject,
         html:             email.html_body,
         text:             email.text_body
-    }
+    }.to_h.reject do |_key, value|
+      value.nil?
 
       if template_id = email.template_id
         data = data.merge!({"template_id" => template_id})
@@ -50,7 +51,8 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         {
           email: carbon_address.address,
           name:  carbon_address.name,
-      }
+      }.to_h.reject do |_key, value|
+        value.nil?
       end
     end
 
@@ -80,8 +82,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
       {
         email: email.from.address,
         name:  email.from.name,
-      }.to_h.reject do |_key, value|
-        value.nil?
+      }
       end
     end
 
