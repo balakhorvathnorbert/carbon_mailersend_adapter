@@ -2,19 +2,19 @@ require "http"
 require "json"
 require "carbon"
 
-class Carbon::SendInBlueAdapter < Carbon::Adapter
+class Carbon::MailersendAdapter < Carbon::Adapter
   private getter api_key : String
 
   def initialize(@api_key)
   end
 
   def deliver_now(email : Carbon::Email)
-    Carbon::SendInBlueAdapter::Email.new(email, api_key).deliver
+    Carbon::MailersendAdapter::Email.new(email, api_key).deliver
   end
 
   class Email
-    BASE_URI       = "api.sendinblue.com"
-    MAIL_SEND_PATH = "/v3/smtp/email"
+    BASE_URI       = "api.mailersend.com"
+    MAIL_SEND_PATH = "/v1/email"
     private getter email, api_key
 
     def initialize(@email : Carbon::Email, @api_key : String)
@@ -29,21 +29,27 @@ class Carbon::SendInBlueAdapter < Carbon::Adapter
     end
 
     def params
-      {
+      data = {
+        from:             from,
         to:               to_send_in_blue_address(email.to),
         subject:          email.subject,
-        sender:           from,
-        htmlContent:      email.html_body,
-        textContent:      email.text_body
+        html:             email.html_body,
+        text:             email.text_body
       }
+
+      if template_id = email.template_id
+        data = data.merge!({"template_id" => template_id})
+      end
+
+      data
     end
 
     private def to_send_in_blue_address(addresses : Array(Carbon::Address))
       addresses.map do |carbon_address|
         {
-          name:  carbon_address.name,
           email: carbon_address.address,
-        }
+          name:  carbon_address.name,
+      }.compact
       end
     end
 
@@ -79,11 +85,10 @@ class Carbon::SendInBlueAdapter < Carbon::Adapter
     end
 
     @_client : HTTP::Client?
-
     private def client : HTTP::Client
       @_client ||= HTTP::Client.new(BASE_URI, port: 443, tls: true).tap do |client|
         client.before_request do |request|
-          request.headers["api-key"] = "#{api_key}"
+          request.headers["Authorization"] = "Bearer #{api_key}"
           request.headers["content-type"] = "application/json"
           request.headers["accept"] = "application/json"
         end

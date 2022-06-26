@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe Carbon::SendInBlueAdapter do
+describe Carbon::MailersendAdapter do
   # TODO: Write tests
 
   it "works" do

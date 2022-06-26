@@ -1,2 +1,2 @@
 require "spec"
-require "../src/carbon_send_in_blue_adapter"
+require "../src/carbon_mailersend_adapter"
