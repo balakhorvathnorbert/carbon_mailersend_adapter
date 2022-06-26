@@ -31,7 +31,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
     def params
       data = {
         from:             from,
-        to:               to_send_in_blue_address(email.to),
+        to:               to_mailersend_address(email.to),
         subject:          email.subject,
         html:             email.html_body,
         text:             email.text_body
@@ -44,7 +44,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
       data
     end
 
-    private def to_send_in_blue_address(addresses : Array(Carbon::Address))
+    private def to_mailersend_address(addresses : Array(Carbon::Address))
       addresses.map do |carbon_address|
         {
           email: carbon_address.address,

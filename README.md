@@ -10,7 +10,7 @@ https://github.com/luckyframework/carbon
 
    ```yaml
    dependencies:
-     carbon_send_in_blue_adapter:
+     carbon_mailersend_adapter:
        github: balakhorvathnorbert/carbon_mailersend_adapter
    ```
 
