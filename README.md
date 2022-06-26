@@ -26,7 +26,7 @@ and update your `config/email.cr` file with:
 require "carbon_mailersend_adapter"
 
 BaseEmail.configure do |settings|
-  if Lucky::Env.production?
+  if LuckyEnv.production?
     mailersend_key = mailersend_key_from_env
     settings.adapter = Carbon::MailersendAdapter.new(api_key: mailersend_key)
   else
