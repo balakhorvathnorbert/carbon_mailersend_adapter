@@ -50,8 +50,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         {
           email: carbon_address.address,
           name:  carbon_address.name,
-      }.to_h.reject do |_key, value|
-        value.nil?
+      }
       end
     end
 
@@ -82,7 +81,6 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         email: email.from.address,
         name:  email.from.name,
       }
-      end
     end
 
     @_client : HTTP::Client?
