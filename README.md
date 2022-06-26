@@ -35,11 +35,11 @@ BaseEmail.configure do |settings|
 end
 
 private def mailersend_key_from_env
-  ENV["SMAILERSEND_API_KEY"]? || raise_missing_key_message
+  ENV["MAILERSEND_API_KEY"]? || raise_missing_key_message
 end
 
 private def raise_missing_key_message
-  puts "Missing SENDINBLUE_API_KEY. Set the MAILERSEND_API_KEY env variable to '' if not sending emails, or set the MAILERSEND_API_KEY ENV var.".colorize.red
+  puts "Missing MAILERSEND_API_KEY. Set the MAILERSEND_API_KEY env variable to '' if not sending emails, or set the MAILERSEND_API_KEY ENV var.".colorize.red
   exit(1)
 end
 
