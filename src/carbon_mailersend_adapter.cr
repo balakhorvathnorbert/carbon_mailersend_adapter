@@ -1,6 +1,7 @@
 require "http"
 require "json"
 require "carbon"
+require "./carbon_mailersend_extensions"
 
 class Carbon::MailersendAdapter < Carbon::Adapter
   private getter api_key : String
@@ -37,7 +38,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         text:             email.text_body
     }
 
-      if email.template_id
+      if template_id = email.template_id
         data = data.merge!({"template_id" => template_id})
       end
 
