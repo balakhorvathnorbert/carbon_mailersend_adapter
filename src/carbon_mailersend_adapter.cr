@@ -31,11 +31,11 @@ class Carbon::MailersendAdapter < Carbon::Adapter
 
     def params
       data = {
-        from    => from,
-        to      => to_mailersend_address(email.to),
-        subject => email.subject,
-        html    => email.html_body,
-        text    => email.text_body
+        "from"    => from,
+        "to"      => to_mailersend_address(email.to),
+        "subject" => email.subject,
+        "html"    => email.html_body,
+        "text"    => email.text_body
     }
 
       if template_id = email.template_id
@@ -48,15 +48,15 @@ class Carbon::MailersendAdapter < Carbon::Adapter
     private def to_mailersend_address(addresses : Array(Carbon::Address))
       addresses.map do |carbon_address|
         {
-          email: carbon_address.address,
-          name:  carbon_address.name,
+          "email" => carbon_address.address,
+          "name"  => carbon_address.name,
       }
       end
     end
 
     private def reply_to_params
       if reply_to_address
-        {email: reply_to_address}
+        {"email" => reply_to_address}
       end
     end
 
@@ -78,8 +78,8 @@ class Carbon::MailersendAdapter < Carbon::Adapter
 
     private def from
       {
-        email: email.from.address,
-        name:  email.from.name,
+        "email" => email.from.address,
+        "name"  => email.from.name,
       }
     end
 
