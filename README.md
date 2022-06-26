@@ -1,4 +1,4 @@
-[![github banner-short](https://user-images.githubusercontent.com/22394/26989908-dd99cc2c-4d22-11e7-9576-c6aeada2bd63.png)](http://luckyframework.org)
+[![github banner-short](https://luckyframework.org/assets/images/logo.png?id=0eaca1807e9ec699940041b2792031ba)](http://luckyframework.org)
 <a href="https://www.mailersend.com"><img src="https://www.mailersend.com/images/logo.svg" width="200px"/></a>
 
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.txt)
