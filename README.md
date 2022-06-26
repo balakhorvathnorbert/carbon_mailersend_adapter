@@ -48,7 +48,7 @@ end
 
 In your email class `/src/emails/YOUR_EMAIL_CLASS.cr` define the `template_id`:
 
-```
+```crystal
 class PasswordResetRequestEmail < BaseEmail
   Habitat.create { setting stubbed_token : String? }
   delegate stubbed_token, to: :settings
