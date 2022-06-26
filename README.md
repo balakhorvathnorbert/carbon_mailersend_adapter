@@ -44,6 +44,28 @@ private def raise_missing_key_message
 end
 
 ```
+### Sending emails using templates
+
+In your email class `/src/emails/YOUR_EMAIL_CLASS.cr` define the `template_id`:
+
+```
+class PasswordResetRequestEmail < BaseEmail
+  Habitat.create { setting stubbed_token : String? }
+  delegate stubbed_token, to: :settings
+
+  def initialize(@user : User)
+    @token = stubbed_token || Authentic.generate_password_reset_token(@user)
+  end
+
+  to @user
+  from "example@example.com" # or set a default in src/emails/base_email.cr
+  subject "Reset your password"
+  templates html, text
+  def template_id
+    "xxxxxxxxxxxx"
+  end
+end
+```
 
 ## Contributing
 
