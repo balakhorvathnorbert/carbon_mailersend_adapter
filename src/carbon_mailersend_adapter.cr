@@ -49,7 +49,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         {
           email: carbon_address.address,
           name:  carbon_address.name,
-      }.compact
+      }
       end
     end
 
