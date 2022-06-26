@@ -31,11 +31,11 @@ class Carbon::MailersendAdapter < Carbon::Adapter
 
     def params
       data = {
-        from:             from,
-        to:               to_mailersend_address(email.to),
-        subject:          email.subject,
-        html:             email.html_body,
-        text:             email.text_body
+        from    => from,
+        to      => to_mailersend_address(email.to),
+        subject => email.subject,
+        html    => email.html_body,
+        text    => email.text_body
     }
 
       if template_id = email.template_id
