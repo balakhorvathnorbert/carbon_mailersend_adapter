@@ -1,7 +1,7 @@
 <a href="http://luckyframework.org"><img src="https://luckyframework.org/assets/images/logo.png?id=0eaca1807e9ec699940041b2792031ba" width="200px"/></a>
 <a href="https://www.mailersend.com"><img src="https://www.mailersend.com/images/logo.svg" width="200px"/></a>
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.txt)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 # mailersend_adapter
 
 This is luckyframework/carbon's adapter for mailersend: https://www.mailersend.com

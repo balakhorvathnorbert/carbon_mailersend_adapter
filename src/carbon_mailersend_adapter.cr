@@ -1,6 +1,7 @@
 require "http"
 require "json"
 require "carbon"
+require "./errors"
 require "./carbon_mailersend_extensions"
 
 class Carbon::MailersendAdapter < Carbon::Adapter
@@ -36,10 +37,29 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         "subject" => email.subject,
         "html"    => email.html_body,
         "text"    => email.text_body
-    }
+    }.compact
 
       if template_id = email.template_id
         data = data.merge!({"template_id" => template_id})
+      else
+        raise MailersendTemplateError.new <<-ERROR
+          You must specify a template_id if you are not using a template.
+
+          In your custom email class define a method with the required template_id:
+
+          ▸ def template_id
+            "xxxxxxxxxxx"
+            end
+          ERROR
+      end
+
+      if variables = email.variables
+        data = data.merge!({"variables" => simple_personalization})
+      end
+
+      if personalization = email.personalization
+        data = data.merge!({"personalization" => advanced_personalization})
+      end
       end
 
       data
@@ -81,6 +101,28 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         "email" => email.from.address,
         "name"  => email.from.name,
       }
+    end
+
+    private def simple_personalization
+      [
+        {
+          "email" => email.to.address,
+          "substitutions" => [
+            variables
+          ]
+        }
+      ]
+    end
+
+    private def advanced_personalization
+      [
+        {
+          "email" => email.to.address,
+          "data" => {
+            personalization
+          }
+        }
+      ]
     end
 
     @_client : HTTP::Client?

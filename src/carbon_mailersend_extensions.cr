@@ -7,6 +7,14 @@ module Carbon::MailersendExtensions
   def template_id
     nil
   end
+
+  def variables
+    nil
+  end
+
+  def personalization
+    nil
+  end
 end
 
 class Carbon::Email
