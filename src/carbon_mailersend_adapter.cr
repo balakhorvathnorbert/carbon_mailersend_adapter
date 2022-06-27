@@ -36,7 +36,9 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         "to"      => to_mailersend_address(email.to),
         "subject" => email.subject,
         "html"    => email.html_body,
-        "text"    => email.text_body
+        "text"    => email.text_body,
+        "variables" => [simple_personalization],
+        "personalization" => [advanced_personalization]
     }.compact
 
       if template_id = email.template_id
@@ -51,14 +53,6 @@ class Carbon::MailersendAdapter < Carbon::Adapter
             "xxxxxxxxxxx"
             end
           ERROR
-      end
-
-      if email.variables
-        data = data.merge!({"variables" => [simple_personalization]})
-      end
-
-      if email.personalization
-        data = data.merge!({"personalization" => [advanced_personalization]})
       end
 
       data
