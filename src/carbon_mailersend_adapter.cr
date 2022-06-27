@@ -105,7 +105,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
     private def simple_personalization
       [
         {
-          "email" => email.to.address,
+          "email" => email.to.address.first,
           "substitutions" => [
             email.variables
           ]
@@ -116,7 +116,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
     private def advanced_personalization
       [
         {
-          "email" => email.to.address,
+          "email" => email.to.address.first,
           "data" => {
             email.personalization
           }
