@@ -53,13 +53,12 @@ class Carbon::MailersendAdapter < Carbon::Adapter
           ERROR
       end
 
-      if variables = email.variables
+      if email.variables
         data = data.merge!({"variables" => simple_personalization})
       end
 
-      if personalization = email.personalization
+      if email.personalization
         data = data.merge!({"personalization" => advanced_personalization})
-      end
       end
 
       data
@@ -108,7 +107,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         {
           "email" => email.to.address,
           "substitutions" => [
-            variables
+            email.variables
           ]
         }
       ]
@@ -119,7 +118,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         {
           "email" => email.to.address,
           "data" => {
-            personalization
+            email.personalization
           }
         }
       ]
