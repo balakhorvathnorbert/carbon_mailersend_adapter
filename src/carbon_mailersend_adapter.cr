@@ -54,11 +54,11 @@ class Carbon::MailersendAdapter < Carbon::Adapter
       end
 
       if email.variables
-        data = data.merge!({"variables" => simple_personalization})
+        data = data.merge!({"variables" => [simple_personalization]})
       end
 
       if email.personalization
-        data = data.merge!({"personalization" => advanced_personalization})
+        data = data.merge!({"personalization" => [advanced_personalization]})
       end
 
       data
@@ -103,25 +103,21 @@ class Carbon::MailersendAdapter < Carbon::Adapter
     end
 
     private def simple_personalization
-      [
         {
           "email" => email.to.first.address,
           "substitutions" => [
             email.variables
           ]
         }
-      ]
     end
 
     private def advanced_personalization
-      [
         {
           "email" => email.to.first.address,
           "data" => {
             email.personalization
           }
         }
-      ]
     end
 
     @_client : HTTP::Client?
