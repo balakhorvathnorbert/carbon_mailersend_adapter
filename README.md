@@ -68,6 +68,12 @@ class PasswordResetRequestEmail < BaseEmail
   def template_id
     "xxxxxxxxxxxx"
   end
+  def variables
+    {
+      "var": "name"
+      "value": "example@example.com"
+    }
+  end
 end
 ```
 
