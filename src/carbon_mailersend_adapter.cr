@@ -45,7 +45,7 @@ class Carbon::MailersendAdapter < Carbon::Adapter
         data = data.merge!({"template_id" => template_id})
       else
         raise MailersendTemplateError.new <<-ERROR
-          You must specify a template_id if you are not using a template.
+          You must specify a template_id if you plan to use a template.
 
           In your custom email class define a method with the required template_id:
 

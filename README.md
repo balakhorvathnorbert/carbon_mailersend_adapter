@@ -2,7 +2,7 @@
 <a href="https://www.mailersend.com"><img src="https://www.mailersend.com/images/logo.svg" width="200px"/></a>
 
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
-# mailersend_adapter
+# Mailersend adapter for Carbon
 
 This is luckyframework/carbon's adapter for mailersend: https://www.mailersend.com
 
