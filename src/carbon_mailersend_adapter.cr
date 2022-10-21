@@ -97,11 +97,10 @@ class Carbon::MailersendAdapter < Carbon::Adapter
     end
 
     private def simple_personalization
+      casted = email.variables.is_a?(Array) ? email.variables : Array{email.variables}
         {
           "email" => email.to.first.address,
-          "substitutions" => [
-            email.variables
-          ]
+          "substitutions" => casted
         }
     end
 
